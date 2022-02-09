@@ -4,10 +4,10 @@
       "generated-by": "SRLINUX",
       "name": "",
       "comment": "",
-      "created": "2022-02-09T05:37:01.344Z",
+      "created": "2022-02-09T07:10:39.782Z",
       "release": "v21.11.1",
       "enabled-yang-features": ["srl_nokia-features:anycast-gw", "srl_nokia-features:bridged", "srl_nokia-features:bt-evpn-vlan-aware-bundle-interop", "srl_nokia-features:dhcp-server", "srl_nokia-features:evpn", "srl_nokia-features:evpn-advertise-arp-nd-only-with-mac-table-entry", "srl_nokia-features:evpn-mh-pref-alg", "srl_nokia-features:evpn-mh-single-active", "srl_nokia-features:fixed", "srl_nokia-features:future-21-11", "srl_nokia-features:host-network-instance", "srl_nokia-features:ipv6-flow-label-hash-key", "srl_nokia-features:isis-maint-mode", "srl_nokia-features:isis-mt", "srl_nokia-features:lacp-fallback", "srl_nokia-features:lag", "srl_nokia-features:mirroring", "srl_nokia-features:platform-7220-d2", "srl_nokia-features:ra-guard", "srl_nokia-features:reload-delay", "srl_nokia-features:service-authorization", "srl_nokia-features:storm-control", "srl_nokia-features:tacacs-authorization", "srl_nokia-features:trident3", "srl_nokia-features:vxlan", "srl_nokia-features:warm-reboot"],
-      "checksum": "1068c21009055e5c$b15cb15ad966409eb0c7dae34aea9b90ac1f1d8a"
+      "checksum": "b054ebb8bee39690$b85777f1d1a5a39297ee0e7253612505be02f8b9"
     },
     "build": {
       "git-branch": "SRL_21_11_B1",
@@ -2081,7 +2081,22 @@
   "srl_nokia-interfaces:interface": [
     {
       "name": "ethernet-1/1",
-      "admin-state": "enable"
+      "admin-state": "enable",
+      "srl_nokia-interfaces-vlans:vlan-tagging": true,
+      "subinterface": [
+        {
+          "index": 0,
+          "type": "srl_nokia-interfaces:bridged",
+          "admin-state": "enable",
+          "srl_nokia-interfaces-vlans:vlan": {
+            "encap": {
+              "untagged": {
+                
+              }
+            }
+          }
+        }
+      ]
     },
     {
       "name": "ethernet-1/49",
@@ -2364,12 +2379,39 @@
               "export-policy": "all",
               "import-policy": "all",
               "peer-as": 201
+            },
+            {
+              "group-name": "iBGP-overlay",
+              "export-policy": "all",
+              "import-policy": "all",
+              "peer-as": 100,
+              "ipv4-unicast": {
+                "admin-state": "disable"
+              },
+              "evpn": {
+                "admin-state": "enable"
+              },
+              "local-as": [
+                {
+                  "as-number": 100
+                }
+              ],
+              "timers": {
+                "minimum-advertisement-interval": 1
+              }
             }
           ],
           "ipv4-unicast": {
             "admin-state": "enable"
           },
           "neighbor": [
+            {
+              "peer-address": "10.0.0.2",
+              "peer-group": "iBGP-overlay",
+              "transport": {
+                "local-address": "10.0.0.1"
+              }
+            },
             {
               "peer-address": "192.168.11.2",
               "peer-group": "eBGP-underlay"
@@ -2395,6 +2437,21 @@
           "export-neighbors": true
         }
       }
+    },
+    {
+      "name": "vrf-1",
+      "type": "srl_nokia-network-instance:mac-vrf",
+      "admin-state": "enable",
+      "interface": [
+        {
+          "name": "ethernet-1/1.0"
+        }
+      ],
+      "vxlan-interface": [
+        {
+          "name": "vxlan1.1"
+        }
+      ]
     }
   ],
   "srl_nokia-routing-policy:routing-policy": {
@@ -2408,5 +2465,19 @@
         }
       }
     ]
-  }
+  },
+  "srl_nokia-tunnel-interfaces:tunnel-interface": [
+    {
+      "name": "vxlan1",
+      "vxlan-interface": [
+        {
+          "index": 1,
+          "type": "srl_nokia-interfaces:bridged",
+          "ingress": {
+            "vni": 1
+          }
+        }
+      ]
+    }
+  ]
 }

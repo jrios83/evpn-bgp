@@ -4,10 +4,10 @@
       "generated-by": "SRLINUX",
       "name": "",
       "comment": "",
-      "created": "2022-02-09T05:36:56.780Z",
+      "created": "2022-02-09T07:10:39.782Z",
       "release": "v21.11.1",
       "enabled-yang-features": ["srl_nokia-features:anycast-gw", "srl_nokia-features:bridged", "srl_nokia-features:bt-evpn-vlan-aware-bundle-interop", "srl_nokia-features:dhcp-server", "srl_nokia-features:evpn", "srl_nokia-features:evpn-advertise-arp-nd-only-with-mac-table-entry", "srl_nokia-features:evpn-mh-pref-alg", "srl_nokia-features:evpn-mh-single-active", "srl_nokia-features:fixed", "srl_nokia-features:future-21-11", "srl_nokia-features:host-network-instance", "srl_nokia-features:ipv6-flow-label-hash-key", "srl_nokia-features:isis-maint-mode", "srl_nokia-features:isis-mt", "srl_nokia-features:lacp-fallback", "srl_nokia-features:lag", "srl_nokia-features:mirroring", "srl_nokia-features:platform-7220-d3", "srl_nokia-features:port-breakout", "srl_nokia-features:ra-guard", "srl_nokia-features:reload-delay", "srl_nokia-features:service-authorization", "srl_nokia-features:storm-control", "srl_nokia-features:tacacs-authorization", "srl_nokia-features:trident3", "srl_nokia-features:vxlan", "srl_nokia-features:warm-reboot"],
-      "checksum": "005c56782eccf6b2$508f26a203a51a431b2271062c52f9da61296e3b"
+      "checksum": "aa528d7033363fff$64a7fc5802d4a09b0caaa63992cb3625ebe8e6df"
     },
     "build": {
       "git-branch": "SRL_21_11_B1",
