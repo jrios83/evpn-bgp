@@ -4,10 +4,10 @@
       "generated-by": "SRLINUX",
       "name": "",
       "comment": "",
-      "created": "2022-02-09T07:10:39.786Z",
+      "created": "2022-02-10T04:51:21.445Z",
       "release": "v21.11.1",
       "enabled-yang-features": ["srl_nokia-features:anycast-gw", "srl_nokia-features:bridged", "srl_nokia-features:bt-evpn-vlan-aware-bundle-interop", "srl_nokia-features:dhcp-server", "srl_nokia-features:evpn", "srl_nokia-features:evpn-advertise-arp-nd-only-with-mac-table-entry", "srl_nokia-features:evpn-mh-pref-alg", "srl_nokia-features:evpn-mh-single-active", "srl_nokia-features:fixed", "srl_nokia-features:future-21-11", "srl_nokia-features:host-network-instance", "srl_nokia-features:ipv6-flow-label-hash-key", "srl_nokia-features:isis-maint-mode", "srl_nokia-features:isis-mt", "srl_nokia-features:lacp-fallback", "srl_nokia-features:lag", "srl_nokia-features:mirroring", "srl_nokia-features:platform-7220-d2", "srl_nokia-features:ra-guard", "srl_nokia-features:reload-delay", "srl_nokia-features:service-authorization", "srl_nokia-features:storm-control", "srl_nokia-features:tacacs-authorization", "srl_nokia-features:trident3", "srl_nokia-features:vxlan", "srl_nokia-features:warm-reboot"],
-      "checksum": "2847cdbfeaaa4a30$c6a81207099acfa3a4b004d27ccd40e91adaa68d"
+      "checksum": "7be8b40ca1cc1ca7$217e4740c5165cda80ad74edfe732d5c7b317781"
     },
     "build": {
       "git-branch": "SRL_21_11_B1",
@@ -2378,7 +2378,10 @@
               "group-name": "eBGP-underlay",
               "export-policy": "all",
               "import-policy": "all",
-              "peer-as": 201
+              "peer-as": 201,
+              "ipv4-unicast": {
+                "admin-state": "enable"
+              }
             },
             {
               "group-name": "iBGP-overlay",
@@ -2407,6 +2410,7 @@
           "neighbor": [
             {
               "peer-address": "10.0.0.1",
+              "admin-state": "enable",
               "peer-group": "iBGP-overlay",
               "transport": {
                 "local-address": "10.0.0.2"
@@ -2451,7 +2455,30 @@
         {
           "name": "vxlan1.1"
         }
-      ]
+      ],
+      "protocols": {
+        "bgp-evpn": {
+          "srl_nokia-bgp-evpn:bgp-instance": [
+            {
+              "id": 1,
+              "admin-state": "enable",
+              "vxlan-interface": "vxlan1.1",
+              "evi": 111
+            }
+          ]
+        },
+        "srl_nokia-bgp-vpn:bgp-vpn": {
+          "bgp-instance": [
+            {
+              "id": 1,
+              "route-target": {
+                "export-rt": "target:100:111",
+                "import-rt": "target:100:111"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "srl_nokia-routing-policy:routing-policy": {

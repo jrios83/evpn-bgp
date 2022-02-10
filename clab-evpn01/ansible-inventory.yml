@@ -3,14 +3,14 @@ all:
     linux:
       hosts:
         clab-evpn01-srv1:
-          ansible_host: 172.20.20.4
+          ansible_host: 172.20.20.5
         clab-evpn01-srv2:
-          ansible_host: 172.20.20.3
+          ansible_host: 172.20.20.6
     srl:
       hosts:
         clab-evpn01-leaf1:
           ansible_host: 172.20.20.2
         clab-evpn01-leaf2:
-          ansible_host: 172.20.20.6
+          ansible_host: 172.20.20.3
         clab-evpn01-spine1:
-          ansible_host: 172.20.20.5
+          ansible_host: 172.20.20.4
